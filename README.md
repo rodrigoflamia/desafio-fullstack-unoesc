@@ -51,6 +51,3 @@ Para auxílio, elaboramos um diagrama de classes simples, apenas com seus nomes 
 - Sentido e coerência nas respostas aos questionamentos na entrevista de apresentação do desafio realizada pelo candidato.
 
 **Não esqueça de documentar o processo necessário para rodar a aplicação.**
-
-
-
