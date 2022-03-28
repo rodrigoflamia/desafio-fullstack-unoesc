@@ -8,6 +8,9 @@ Desenvolver uma aplicação web responsável por se conectar à API REST do Serv
 
 Documentação disponível em: [Swagger UI](https://api.portaldatransparencia.gov.br/swagger-ui.html)
 
+OBS.: caso encontre problemas na geração do token da chave de acesso à API, temporariamente pode ser utilizado essa:
+{"key":"chave-api-dados","value":"59eeaf7bd6e9ac852374c683dbf911fc"}
+
 Segue em destaque na imagem, extraída da documentação, o *endpoint* a ser utilizado:
 <div align="center">
 	<img src="https://user-images.githubusercontent.com/12573430/159770511-5363ace6-35fe-45de-add4-298bd601c3af.png" />
