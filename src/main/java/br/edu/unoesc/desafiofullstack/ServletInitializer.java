@@ -1,4 +1,4 @@
-package br.edu.unoesc.desafiofullstackunoesc;
+package br.edu.unoesc.desafiofullstack;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
@@ -7,7 +7,7 @@ public class ServletInitializer extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(DesafioFullstackUnoescApplication.class);
+		return application.sources(DesafioFullstackApplication.class);
 	}
 
 }

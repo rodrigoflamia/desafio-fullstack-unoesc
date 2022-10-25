@@ -1,39 +1,34 @@
-# Desafio Programador Fullstack UNOESC
+# Desafio Programador Fullstack Unoesc
 
-Esse é o nosso desafio para a vaga de programador fullstack na [UNOESC](https://www.unoesc.edu.br/). Serão testadas as habilidades e qualidade de código ao transformar requisitos limitados em uma aplicação web.
+Esse é o nosso desafio para a vaga de programador fullstack na [Unoesc](https://www.unoesc.edu.br/). Serão testadas as habilidades e qualidade de código ao transformar requisitos limitados em uma aplicação web.
 
 ## DESAFIO
 
-Desenvolver uma aplicação web responsável por se conectar à API REST do Serviço do Portal da Transparência do Governo Federal. A requisição deverá ser realizada especificamente no *endpoint* de "Consulta aos registros dos beneficiários por município e mês/ano" do *path* de "Benefícios ao cidadão".
+Você terá que desenvolver uma aplicação web responsável por registrar pessoas e seus dados de contato e endereço. Para esse cadastro é muito importante que o endereço preenchido seja um endereço válido. Portanto, torna-se necesária a validação do CEP e preenchimento do endereço através da API ViaCEP. 
 
-Documentação disponível em: [Swagger UI](https://api.portaldatransparencia.gov.br/swagger-ui.html)
-
-OBS.: caso encontre problemas na geração do token da chave de acesso à API, temporariamente pode ser utilizado essa:
-{"key":"chave-api-dados","value":"59eeaf7bd6e9ac852374c683dbf911fc"}
-
-Segue em destaque na imagem, extraída da documentação, o *endpoint* a ser utilizado:
-<div align="center">
-	<img src="https://user-images.githubusercontent.com/12573430/159770511-5363ace6-35fe-45de-add4-298bd601c3af.png" />
-</div>
+Documentação da API disponível aqui: https://viacep.com.br
 
 ### ESCOPO DO DESAFIO
 
 **Requisitos**
-- A aplicação deve ser protegida (usuario pode acessar somente com autenticação);
-- A tela de consulta deve permitir informar um mês/ano e o código IBGE do município, então consultar os dados na API especificada;
-- Com o resultado obtido da consulta a aplicação deve extrair um relatório no formato CSV com o valor total de benefícios recebidos por parcela no município;
-- O resultado também deverá ser persistido na base de dados;
+- O cadastro de pessoas deve conter: Nome, CPF, data de nascimento e gênero; 
+- O cadastro de contato deve conter: Telefone e enderereço de e-mail;
+- O cadastro de endereço deve conter: CEP, logradouro, número, bairro, município e estado;
+  -  O CEP deve ser validado e o endereço deve ser autocompletado pela API;
+  - Após o preenchimento do CEP apenas as inforamções que não são retornadas da API podem ser editadas, as demais devem ser bloqueadas para edição. 
+- Deve ser possível consultar, editar e excluir os cadastros;
+- A aplicação deve ser protegida por um login. Porém, não é necessário que exista uma tela para cadastro de usuários.
+
+**Atenção!**
+- Não há requisitos quando ao formato de exibição das telas de cadastro e consulta, fica livre a escolha do candidato.
 - Versionar o projeto realizando commits com comentários do que está sendo implementado;
-- Soluções parciais serão aceitas, mas o que for submetido deve estar funcionando.
+- Soluções parciais serão aceitas, porém o que for submetido deve estar funcionando.
+- Documentar todas as suposições realizadas sobre o desafio no arquivo README.md.
+  - Exemplo de suposição: "Não é obrigatório o preenchimento do endereço de e-mail no cadastro do endereço". 
 
-Para auxílio, elaboramos um diagrama de classes simples, apenas com seus nomes e atributos, para compor informações do resultado (a ser persistido e extraído no CSV): 
-<div align="left">
-	<img src="https://user-images.githubusercontent.com/12573430/159984550-207dc17c-54e7-453d-9883-be9d6535fb7e.png" />
-</div>
+Para auxiliar no entendimento, elaboramos um diagrama de classes simples contendo apenas classes e atributos: 
 
-**Documentar todas as suposições realizadas sobre o desafio no arquivo README.md.**
-- Exemplo de suposição: 
-- A tela de pesquisa não permite consultar sem informar o código IBGE.
+![diagramadeclasse](https://user-images.githubusercontent.com/4011040/197817709-3e4cfb77-e863-4096-a610-8290f71b8aef.png)
 
 **Tecnologias a serem utilizadas:**
 - Java 8;
@@ -49,7 +44,7 @@ Para auxílio, elaboramos um diagrama de classes simples, apenas com seus nomes 
 - Build e execução da aplicação;
 - Completude das funcionalidades;
 - Qualidade de código (design pattern, manutenibilidade, clareza); 
-- Histórico do Git; 
+- Histórico do GIT; 
 - Boas práticas de UI (Interface com o Usuário);
 - Sentido e coerência nas respostas aos questionamentos na entrevista de apresentação do desafio realizada pelo candidato.
 

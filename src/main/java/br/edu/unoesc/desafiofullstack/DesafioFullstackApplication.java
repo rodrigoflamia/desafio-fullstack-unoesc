@@ -1,13 +1,13 @@
-package br.edu.unoesc.desafiofullstackunoesc;
+package br.edu.unoesc.desafiofullstack;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DesafioFullstackUnoescApplication {
+public class DesafioFullstackApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DesafioFullstackUnoescApplication.class, args);
+		SpringApplication.run(DesafioFullstackApplication.class, args);
 	}
 
 }
