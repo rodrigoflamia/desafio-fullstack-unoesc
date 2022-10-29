@@ -1,18 +1,25 @@
 package br.edu.unoesc.desafiofullstack.models;
 
 import javax.persistence.*;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 
 @Entity
-public class Pessoa {
+public class Pessoa implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 	private String nome;
 	private String CPF;
-	private Date dataNascimento;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date data_nascimento;
 	private String sexo;
 	
 	@OneToMany(mappedBy = "pessoa")
@@ -22,10 +29,10 @@ public class Pessoa {
 	private List<Contato> contatos;
 
 	//Getters and Setters
-	public Long getCodigoPessoa() {
+	public Long getCodigo() {
 		return codigo;
 	}
-	public void setCodigoPessoa(Long codigo) {
+	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
 	}
 
@@ -42,14 +49,14 @@ public class Pessoa {
 	public void setCPF(String cPF) {
 		CPF = cPF;
 	}
-
-	public Date getDataNascimento() {
-		return dataNascimento;
+	
+	public Date getData_nascimento() {
+		return data_nascimento;
 	}
-	public void setDataNascimento(Date dataNascimento) {
-		this.dataNascimento = dataNascimento;
+	public void setData_nascimento(Date data_nascimento) {
+		this.data_nascimento = data_nascimento;
 	}
-
+	
 	public String getSexo() {
 		return sexo;
 	}

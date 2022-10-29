@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<title>Lista de Pessoas</title>
+	
+	<!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+	<h1>Lista de Pessoas</h1>
+	
+	<h3>
+		<a href="/cadastro-pessoa" class="waves-effect waves-light btn"><i class="material-icons left">add_circle_outline</i>Cadastrar Pessoa</a>
+	</h3>
+	
+	<table class="container">
+		<thead>
+			<tr>
+				<th>Nome</th>
+				<th>CPF</th>
+				<th>Data de Nascimento</th>
+				<th>Sexo</th>
+				<th>Contato</th>
+				<th>Endereço</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="pessoa : ${pessoas}">
+				<td><span th:text="${pessoa.nome}"></span></td>
+				<td><span th:text="${pessoa.CPF}"></span></td>
+				<td><span th:text="${pessoa.data_nascimento}"></span></td>
+				<td><span th:text="${pessoa.sexo}"></span></td>
+				<td>
+					<a th:href="@{'/contatos/' + ${pessoa.codigo}}"
+						class="waves-effect waves-light btn-large"><i class="material-icons left">contacts</i>Contatos
+					</a>
+				</td>
+				<td>
+					<a th:href="@{'/enderecos/' + ${pessoa.codigo}}"
+						class="waves-effect waves-light btn-large"><i class="material-icons left">location_city</i>Endereços
+					</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+</body>	
+</html>
