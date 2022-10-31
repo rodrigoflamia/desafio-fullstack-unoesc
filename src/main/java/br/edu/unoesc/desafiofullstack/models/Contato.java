@@ -1,6 +1,8 @@
 package br.edu.unoesc.desafiofullstack.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 
 @Entity
@@ -12,7 +14,12 @@ public class Contato {
 	@ManyToOne
 	@JoinColumn(name = "codigo_pessoa", referencedColumnName = "codigo")
 	private Pessoa pessoa;
+	
+	@NotBlank(message = "Telefone não informado!")
 	private String telefone;
+	
+	@Email(message = "Email inválido!")
+	@NotBlank(message = "Email não informado!")
 	private String email;
 	
 	//Getters and Setters

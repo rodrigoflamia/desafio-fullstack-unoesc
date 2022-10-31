@@ -1,8 +1,10 @@
 package br.edu.unoesc.desafiofullstack.models;
 
-import javax.persistence.*;
-
+import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -16,10 +18,18 @@ public class Pessoa implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
+	
+	@NotBlank(message = "Nome não informado!")
 	private String nome;
+	
+	@CPF(message = "CPF inválido!")
+	@NotBlank(message = "CPF não informado!")
 	private String CPF;
+	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date data_nascimento;
+	
+	@NotBlank(message = "Sexo não informado!")
 	private String sexo;
 	
 	@OneToMany(mappedBy = "pessoa")

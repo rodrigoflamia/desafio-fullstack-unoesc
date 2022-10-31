@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<title>Lista de Endereços</title>
+	
+	<script>
+		function formatar(mascara, documento){
+			var i = documento.value.length;
+			var saida = mascara.substring(0,1);
+			var texto = mascara.substring(i)
+			
+			if (texto.substring(0,1) != saida){
+				documento.value += texto.substring(0,1)
+			}
+		}
+	</script>
+	
+	<!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+	<header>
+		<nav>
+		    <div class="nav-wrapper teal lighten-2">
+		    	<a href="#" class="brand-logo">Cadastro de Endereços</a>
+		      	<ul id="nav-mobile" class="right hide-on-med-and-down">
+		        	<li><a class="waves-effect waves-light btn"><i class="material-icons left">exit_to_app</i>Logout</a></li>
+		      	</ul>
+		      	<ul id="nav-mobile" class="right hide-on-med-and-down">
+		        	<li><a href="/index" class="waves-effect waves-light btn"><i class="material-icons left">view_list</i>Lista de Pessoas</a></li>
+		      	</ul>
+		    </div>
+		</nav>
+	</header>
+
+	<div class="container"><h5>Perfil:</h5></div>
+	<table class="container">
+		<thead>
+			<tr>
+				<th>Nome</th>
+				<th>CPF</th>
+				<th>Data de Nascimento</th>
+				<th>Sexo</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="pessoa : ${pessoa}">
+				<td><span th:text="${pessoa.nome}"></span></td>
+				<td><span th:text="${pessoa.CPF}"></span></td>
+				<td><span th:text="${pessoa.data_nascimento}"></span></td>
+				<td><span th:text="${pessoa.sexo}"></span></td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<h1></h1>
+	<div class="container"><h5>Endereço:</h5></div>
+	<form class="container" method="post">
+		<div class="row">
+			<div class="input-fild col s3">
+				CEP: <input type="text" maxlength="9" OnKeyPress="formatar('#####-###', this)" value="" name="cep">
+			</div>
+			<div class="input-fild col s6">
+				Logradouro: <input type="text" value="" name="logradouro">
+			</div>
+			<div class="input-fild col s3">
+				Numero: <input type="text" value="" name="numero">
+			</div>
+			<div class="input-fild col s5">
+				Bairro: <input type="text" value="" name="bairro">
+			</div>
+			<div class="input-fild col s4">
+				Município: <input type="text" value="" name="municipio">
+			</div>
+			<div class="input-fild col s3">
+				Estado: <input type="text" value="" name="estado">
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-fild col s1.5">
+				<button class="waves-effect waves-light btn" type="submit">Salvar</button>
+			</div>
+			<div class="input-fild col s10.5">
+				<th:block th:include="mensagemValidacao"></th:block>
+			</div>
+		</div>
+	</form>
+	
+	<h1></h1>
+	<div class="container"><h5>Endereços Cadastrados:</h5></div>
+	<table class="container">
+		<thead>
+			<tr>
+				<th>CEP</th>
+				<th>Logradouro</th>
+				<th>Numero</th>
+				<th>Bairro</th>
+				<th>Municipio</th>
+				<th>Estado</th>
+				<th>Editar</th>
+				<th>Deletar</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="enderecos : ${enderecos}">
+				<td><span th:text="${enderecos.cep}"></span></td>
+				<td><span th:text="${enderecos.logradouro}"></span></td>
+				<td><span th:text="${enderecos.numero}"></span></td>
+				<td><span th:text="${enderecos.bairro}"></span></td>
+				<td><span th:text="${enderecos.municipio}"></span></td>
+				<td><span th:text="${enderecos.estado}"></span></td>
+				<td>
+					<a th:href="@{/editar-endereco/{codigo}(codigo=${endereco.codigo})}"
+						class="waves-effect waves-light btn-small"><i class="material-icons center">edit</i>
+					</a>
+				</td>
+				<td>
+					<a th:href="@{/excluir-endereco/{codigo}(codigo=${endereco.codigo})}"
+						class="waves-effect waves-light btn-small"><i class="material-icons center">delete</i>
+					</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+</body>	
+</html>

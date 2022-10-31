@@ -1,6 +1,7 @@
 package br.edu.unoesc.desafiofullstack.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 
 @Entity
@@ -12,11 +13,23 @@ public class Endereco {
 	@ManyToOne
 	@JoinColumn(name = "codigo_pessoa", referencedColumnName = "codigo")
 	private Pessoa pessoa;
+	
+	@NotBlank(message = "CEP não informado!")
 	private String cep;
+	
+	@NotBlank(message = "Logradouro não informado!")
 	private String logradouro;
+	
+	@NotBlank(message = "Numero não informado!")
 	private String numero;
+	
+	@NotBlank(message = "Bairro não informado!")
 	private String bairro;
+	
+	@NotBlank(message = "Municipio não informado!")
 	private String municipio;
+	
+	@NotBlank(message = "Estado não informado!")
 	private String estado;
 	
 	//Getters and Setters

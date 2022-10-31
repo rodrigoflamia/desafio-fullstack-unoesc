@@ -2,7 +2,7 @@
 <html xmlns:th="http://thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-	<title>Cadastro de Pessoas</title>
+	<title>Lista de Contatos</title>
 	
 	<script>
 		function formatar(mascara, documento){
@@ -28,7 +28,7 @@
 	<header>
 		<nav>
 		    <div class="nav-wrapper teal lighten-2">
-		    	<a href="#" class="brand-logo">Cadastro de Pessoas</a>
+		    	<a href="#" class="brand-logo">Cadastro de Contatos</a>
 		      	<ul id="nav-mobile" class="right hide-on-med-and-down">
 		        	<li><a class="waves-effect waves-light btn"><i class="material-icons left">exit_to_app</i>Logout</a></li>
 		      	</ul>
@@ -38,18 +38,36 @@
 		    </div>
 		</nav>
 	</header>
-	
-	<div class="container"><h5>Perfil:</h5></div>
-	<form class="container" action="#" th:action="@{/cadastrar-pessoa}" th:object="${pessoa}" method="post">
-		Nome:<input type="text" th:field="*{nome}" id="nome" placeholder="Nome">
-		CPF: <input type="text" th:field="*{CPF}" id="CPF" placeholder="CPF" maxlength="14" OnKeyPress="formatar('###.###.###-##', this)">	
-		Data de Nascimento: <input type="date" th:field="*{data_nascimento}" id="data_nascimento" placeholder="DataNascimento">		
-		Sexo: <input type="text" th:field="*{sexo}" id="sexo" placeholder="Sexo">
 		
-		<h1></h1>
+	<div class="container"><h5>Perfil:</h5></div>
+	<table class="container">
+		<thead>
+			<tr>
+				<th>Nome</th>
+				<th>CPF</th>
+				<th>Data de Nascimento</th>
+				<th>Sexo</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="pessoa : ${pessoa}">
+				<td><span th:text="${pessoa.nome}"></span></td>
+				<td><span th:text="${pessoa.CPF}"></span></td>
+				<td><span th:text="${pessoa.data_nascimento}"></span></td>
+				<td><span th:text="${pessoa.sexo}"></span></td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<h1></h1>
+	<div class="container"><h5>Contato:</h5></div>
+	<form class="container" method="post">
+		Telefone: <input type="text" maxlength="13" OnKeyPress="formatar('## #####-####', this)" value="" name="telefone">
+		Email: <input type="text" value="" name="email">
+		
 		<div class="row">
 			<div class="input-fild col s1.5">
-				<button class="waves-effect waves-light btn" type="submit" value="Add Pessoa">Salvar</button>
+				<button class="waves-effect waves-light btn" type="submit">Salvar</button>
 			</div>
 			<div class="input-fild col s10.5">
 				<th:block th:include="mensagemValidacao"></th:block>
@@ -57,6 +75,35 @@
 		</div>
 	</form>
 	
+	<h1></h1>
+	<div class="container"><h5>Contatos Cadastrados:</h5></div>
+	<table class="container">
+		<thead>
+			<tr>
+				<th>Telefone</th>
+				<th>Email</th>
+				<th>Editar</th>
+				<th>Deletar</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="contatos : ${contatos}">
+				<td><span th:text="${contatos.telefone}"></span></td>
+				<td><span th:text="${contatos.email}"></span></td>
+				<td>
+					<a th:href="@{/editar-contato/{codigo}(codigo=${contato.codigo})}"
+						class="waves-effect waves-light btn-small"><i class="material-icons center">edit</i>
+					</a>
+				</td>
+				<td>
+					<a th:href="@{/excluir-contato/{codigo}(codigo=${contato.codigo})}"
+						class="waves-effect waves-light btn-small"><i class="material-icons center">delete</i>
+					</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+			
 	<!--JavaScript at end of body for optimized loading-->
     <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
 </body>	

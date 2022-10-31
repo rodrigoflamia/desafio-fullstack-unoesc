@@ -2,7 +2,7 @@
 <html xmlns:th="http://thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-	<title>Cadastro de Pessoas</title>
+	<title>Editar Endereço</title>
 	
 	<script>
 		function formatar(mascara, documento){
@@ -28,7 +28,7 @@
 	<header>
 		<nav>
 		    <div class="nav-wrapper teal lighten-2">
-		    	<a href="#" class="brand-logo">Cadastro de Pessoas</a>
+		    	<a href="#" class="brand-logo">Editar Endereço</a>
 		      	<ul id="nav-mobile" class="right hide-on-med-and-down">
 		        	<li><a class="waves-effect waves-light btn"><i class="material-icons left">exit_to_app</i>Logout</a></li>
 		      	</ul>
@@ -39,24 +39,40 @@
 		</nav>
 	</header>
 	
-	<div class="container"><h5>Perfil:</h5></div>
-	<form class="container" action="#" th:action="@{/cadastrar-pessoa}" th:object="${pessoa}" method="post">
-		Nome:<input type="text" th:field="*{nome}" id="nome" placeholder="Nome">
-		CPF: <input type="text" th:field="*{CPF}" id="CPF" placeholder="CPF" maxlength="14" OnKeyPress="formatar('###.###.###-##', this)">	
-		Data de Nascimento: <input type="date" th:field="*{data_nascimento}" id="data_nascimento" placeholder="DataNascimento">		
-		Sexo: <input type="text" th:field="*{sexo}" id="sexo" placeholder="Sexo">
-		
-		<h1></h1>
+	<h1></h1>
+	<div class="container"><h5>Endereço:</h5></div>
+	<form class="container" th:action="@{/update-endereco/{codigo}(codigo=${endereco.codigo})}" 
+	                        th:object="${endereco}" method="post">
+		<div class="row">
+			<div class="input-fild col s3">
+				CEP: <input type="text" maxlength="9" OnKeyPress="formatar('#####-###', this)" value="" name="cep">
+			</div>
+			<div class="input-fild col s6">
+				Logradouro: <input type="text" value="" name="logradouro">
+			</div>
+			<div class="input-fild col s3">
+				Numero: <input type="text" value="" name="numero">
+			</div>
+			<div class="input-fild col s5">
+				Bairro: <input type="text" value="" name="bairro">
+			</div>
+			<div class="input-fild col s4">
+				Município: <input type="text" value="" name="municipio">
+			</div>
+			<div class="input-fild col s3">
+				Estado: <input type="text" value="" name="estado">
+			</div>
+		</div>
 		<div class="row">
 			<div class="input-fild col s1.5">
-				<button class="waves-effect waves-light btn" type="submit" value="Add Pessoa">Salvar</button>
+				<button class="waves-effect waves-light btn" type="submit">Salvar</button>
 			</div>
 			<div class="input-fild col s10.5">
 				<th:block th:include="mensagemValidacao"></th:block>
 			</div>
 		</div>
 	</form>
-	
+
 	<!--JavaScript at end of body for optimized loading-->
     <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
 </body>	

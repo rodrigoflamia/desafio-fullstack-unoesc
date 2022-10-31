@@ -3,7 +3,7 @@
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 	<title>Lista de Pessoas</title>
-	
+  	
 	<!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
     <!--Import materialize.css-->
@@ -12,13 +12,19 @@
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
-<body>
-	<h1>Lista de Pessoas</h1>
+<body>	
+	<header>
+		<nav>
+		    <div class="nav-wrapper teal lighten-2">
+		    	<a href="#" class="brand-logo">Lista de Pessoas</a>
+		      	<ul id="nav-mobile" class="right hide-on-med-and-down">
+		        	<li><a class="waves-effect waves-light btn"><i class="material-icons left">exit_to_app</i>Logout</a></li>
+		      	</ul>
+		    </div>
+		</nav>
+	</header>
 	
-	<h3>
-		<a href="/cadastro-pessoa" class="waves-effect waves-light btn"><i class="material-icons left">add_circle_outline</i>Cadastrar Pessoa</a>
-	</h3>
-	
+	<div class="container"><h5>Pessoas Cadastradas:</h5></div>
 	<table class="container">
 		<thead>
 			<tr>
@@ -28,6 +34,8 @@
 				<th>Sexo</th>
 				<th>Contato</th>
 				<th>Endereço</th>
+				<th>Editar</th>
+				<th>Deletar</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -37,18 +45,34 @@
 				<td><span th:text="${pessoa.data_nascimento}"></span></td>
 				<td><span th:text="${pessoa.sexo}"></span></td>
 				<td>
-					<a th:href="@{'/contatos/' + ${pessoa.codigo}}"
-						class="waves-effect waves-light btn-large"><i class="material-icons left">contacts</i>Contatos
+					<a th:href="@{'/cadastrar-contato/' + ${pessoa.codigo}}"
+						class="waves-effect waves-light btn-small"><i class="material-icons center">contacts</i>
 					</a>
 				</td>
 				<td>
-					<a th:href="@{'/enderecos/' + ${pessoa.codigo}}"
-						class="waves-effect waves-light btn-large"><i class="material-icons left">location_city</i>Endereços
+					<a th:href="@{'/cadastrar-endereco/' + ${pessoa.codigo}}"
+						class="waves-effect waves-light btn-small"><i class="material-icons center">location_city</i>
+					</a>
+				</td>
+				<td>
+					<a th:href="@{/editar-pessoa/{codigo}(codigo=${pessoa.codigo})}"
+						class="waves-effect waves-light btn-small"><i class="material-icons center">edit</i>
+					</a>
+				</td>
+				<td>
+					<a th:href="@{/excluir-pessoa/{codigo}(codigo=${pessoa.codigo})}"
+						class="waves-effect waves-light btn-small"><i class="material-icons center">delete</i>
 					</a>
 				</td>
 			</tr>
+			
 		</tbody>
 	</table>
+	
+	<h1></h1>
+	<div class="container">
+		<a href="/cadastrar-pessoa" class="waves-effect waves-light btn"><i class="material-icons left">add_circle_outline</i>Cadastrar Pessoa</a>
+	</div>
 	
 	<!--JavaScript at end of body for optimized loading-->
     <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
