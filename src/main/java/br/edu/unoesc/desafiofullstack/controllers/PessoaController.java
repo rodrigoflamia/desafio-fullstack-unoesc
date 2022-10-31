@@ -11,11 +11,20 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.google.gson.Gson;
+
 import org.springframework.validation.FieldError;
 
 import br.edu.unoesc.desafiofullstack.repository.*;
 import br.edu.unoesc.desafiofullstack.models.*;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -68,7 +77,7 @@ public class PessoaController {
             pessoa.setCodigo(null);
             return "pessoa/updatePessoa";
         }
-            
+          
         pr.save(pessoa);
         return "redirect:/index";
     }
@@ -77,13 +86,15 @@ public class PessoaController {
     public String deleteUser(@PathVariable("codigo") Long codigo, Model model) {
         Pessoa pessoa = pr.findById(codigo)
           .orElseThrow(() -> new IllegalArgumentException("Código inválido:" + codigo));
+        
         pr.delete(pessoa);
         return "redirect:/index";
     }
     
     //Cadastro de Contatos
     @GetMapping("/cadastrar-contato/{codigo}")
-    public String formContato(Contato contato) {
+    public String formContato(@PathVariable("codigo") Long codigo, Model model) {
+    	model.addAttribute("contatos", cr.findContatosByPessoa(codigo));
         return "pessoa/formContato";
     }
 	
@@ -93,10 +104,13 @@ public class PessoaController {
         	return "pessoa/formContato";
         }
         
+        Pessoa pessoa = pr.findById(codigo).get();
+		contato.setPessoa(pessoa);        
 		cr.save(contato);
         return "redirect:/index";
     }
-    /*
+    
+    //
     @GetMapping("/editar-contato/{codigo}")
     public String formUpdateContato(@PathVariable("codigo") Long codigo, Model model) {
         Contato contato = cr.findById(codigo)
@@ -125,26 +139,50 @@ public class PessoaController {
         cr.delete(contato);
         return "redirect:/index";
     }
-    */
-  //Cadastro de Endereços
+    
+    //Cadastro de Endereços
     @GetMapping("/cadastrar-endereco/{codigo}")
-    public String formEndereco(Endereco endereco) {
+    public String formEndereco(@PathVariable("codigo") Long codigo, Endereco endereco, Model model) {
+    	model.addAttribute("enderecos", er.findEnderecosByPessoa(codigo));
         return "pessoa/formEndereco";
     }
 	
     @PostMapping("/cadastrar-endereco/{codigo}")
-    public String addEndereco(@PathVariable("codigo") Long codigo, @Valid Endereco endereco, BindingResult result, Model model) {
+    public String addEndereco(@PathVariable("codigo") Long codigo, @Valid Endereco endereco, BindingResult result, Model model) throws Exception {
         if (result.hasErrors()) {
         	return "pessoa/formEndereco";
         }
         
-        //Pessoa pessoa = pr.findByCodigo(codigo);
-		//endereco.setPessoa(pessoa);
-        //endereco.setPessoa(pr.findById(codigo));
+        /*
+        //API ViaCep
+        URL url = new URL("https://viacep.com.br/ws/"+endereco.getCep()+"/json/");
+        URLConnection connection = url.openConnection();
+        InputStream is = connection.getInputStream();
+        BufferedReader br = new BufferedReader(new InputStreamReader(is,"UTF-8"));
+        
+        String cep = "";
+        StringBuilder jsonCep = new StringBuilder();
+        
+        while((cep = br.readLine()) != null) {
+        	jsonCep.append(cep);
+        }
+        
+        Endereco auxEndereco = new Gson().fromJson(jsonCep.toString(), Endereco.class);
+        endereco.setCep(auxEndereco.getCep());
+        endereco.setLogradouro(auxEndereco.getLogradouro());
+        endereco.setBairro(auxEndereco.getBairro());
+        endereco.setMunicipio(auxEndereco.getMunicipio());
+        endereco.setEstado(auxEndereco.getEstado());
+        //API ViaCep
+        */
+        
+        Pessoa pessoa = pr.findById(codigo).get();
+		endereco.setPessoa(pessoa);
 		er.save(endereco);
         return "redirect:/index";
     }
-    /*
+    
+    //
     @GetMapping("/editar-endereco/{codigo}")
     public String formUpdateEndereco(@PathVariable("codigo") Long codigo, Model model) {
         Endereco endereco = er.findById(codigo)
@@ -173,7 +211,6 @@ public class PessoaController {
         er.delete(endereco);
         return "redirect:/index";
     }
-	*/
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)

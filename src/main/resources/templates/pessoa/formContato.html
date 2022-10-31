@@ -87,16 +87,16 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr th:each="contatos : ${contatos}">
-				<td><span th:text="${contatos.telefone}"></span></td>
-				<td><span th:text="${contatos.email}"></span></td>
+			<tr th:each="contato : ${contatos}">
+				<td><span th:text="${contato.telefone}"></span></td>
+				<td><span th:text="${contato.email}"></span></td>
 				<td>
-					<a th:href="@{/editar-contato/{codigo}(codigo=${contato.codigo})}"
+					<a href=""
 						class="waves-effect waves-light btn-small"><i class="material-icons center">edit</i>
 					</a>
 				</td>
 				<td>
-					<a th:href="@{/excluir-contato/{codigo}(codigo=${contato.codigo})}"
+					<a href=""
 						class="waves-effect waves-light btn-small"><i class="material-icons center">delete</i>
 					</a>
 				</td>

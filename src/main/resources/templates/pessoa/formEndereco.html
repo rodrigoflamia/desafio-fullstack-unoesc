@@ -64,22 +64,22 @@
 	<form class="container" method="post">
 		<div class="row">
 			<div class="input-fild col s3">
-				CEP: <input type="text" maxlength="9" OnKeyPress="formatar('#####-###', this)" value="" name="cep">
+				CEP: <input type="text" maxlength="9" OnKeyPress="formatar('#####-###', this)" value="" name="cep" id="cep">
 			</div>
 			<div class="input-fild col s6">
-				Logradouro: <input type="text" value="" name="logradouro">
+				Logradouro: <input type="text" value="" name="logradouro" id="logradouro">
 			</div>
 			<div class="input-fild col s3">
 				Numero: <input type="text" value="" name="numero">
 			</div>
 			<div class="input-fild col s5">
-				Bairro: <input type="text" value="" name="bairro">
+				Bairro: <input type="text" value="" name="bairro" id="bairro">
 			</div>
 			<div class="input-fild col s4">
-				Município: <input type="text" value="" name="municipio">
+				Município: <input type="text" value="" name="municipio" id="localidade">
 			</div>
 			<div class="input-fild col s3">
-				Estado: <input type="text" value="" name="estado">
+				Estado: <input type="text" value="" name="estado" id="uf">
 			</div>
 		</div>
 		<div class="row">
@@ -108,20 +108,20 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr th:each="enderecos : ${enderecos}">
-				<td><span th:text="${enderecos.cep}"></span></td>
-				<td><span th:text="${enderecos.logradouro}"></span></td>
-				<td><span th:text="${enderecos.numero}"></span></td>
-				<td><span th:text="${enderecos.bairro}"></span></td>
-				<td><span th:text="${enderecos.municipio}"></span></td>
-				<td><span th:text="${enderecos.estado}"></span></td>
+			<tr th:each="endereco : ${enderecos}">
+				<td><span th:text="${endereco.cep}"></span></td>
+				<td><span th:text="${endereco.logradouro}"></span></td>
+				<td><span th:text="${endereco.numero}"></span></td>
+				<td><span th:text="${endereco.bairro}"></span></td>
+				<td><span th:text="${endereco.municipio}"></span></td>
+				<td><span th:text="${endereco.estado}"></span></td>
 				<td>
-					<a th:href="@{/editar-endereco/{codigo}(codigo=${endereco.codigo})}"
+					<a href=""
 						class="waves-effect waves-light btn-small"><i class="material-icons center">edit</i>
 					</a>
 				</td>
 				<td>
-					<a th:href="@{/excluir-endereco/{codigo}(codigo=${endereco.codigo})}"
+					<a href=""
 						class="waves-effect waves-light btn-small"><i class="material-icons center">delete</i>
 					</a>
 				</td>
@@ -130,5 +130,8 @@
 	</table>
 	<!--JavaScript at end of body for optimized loading-->
     <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+    
+    <!--API ViaCEP -->
+    <script src="scripts.js"></script>
 </body>	
 </html>

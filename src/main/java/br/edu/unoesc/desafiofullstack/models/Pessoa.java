@@ -32,10 +32,10 @@ public class Pessoa implements Serializable{
 	@NotBlank(message = "Sexo não informado!")
 	private String sexo;
 	
-	@OneToMany(mappedBy = "pessoa")
+	@OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)
 	private List<Endereco> enderecos;
 	
-	@OneToMany(mappedBy = "pessoa")
+	@OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)
 	private List<Contato> contatos;
 
 	//Getters and Setters

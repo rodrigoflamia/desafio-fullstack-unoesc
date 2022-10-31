@@ -18,19 +18,19 @@ public class Endereco {
 	private String cep;
 	
 	@NotBlank(message = "Logradouro não informado!")
-	private String logradouro;
+	private String logradouro;	//API ViaCEP
 	
 	@NotBlank(message = "Numero não informado!")
 	private String numero;
 	
 	@NotBlank(message = "Bairro não informado!")
-	private String bairro;
+	private String bairro;		//API ViaCEP
 	
 	@NotBlank(message = "Municipio não informado!")
-	private String municipio;
+	private String municipio;	//API ViaCEP - localidade
 	
 	@NotBlank(message = "Estado não informado!")
-	private String estado;
+	private String estado;		//API ViaCEP - uf
 	
 	//Getters and Setters
 	public Long getCodigoEndereco() {
